@@ -1,0 +1,59 @@
+Projet NLP : Analyse de Sentiment & Nettoyage de Texte
+
+Classification des phrases en sentiment positif, négatif ou neutre
+
+🎯 Objectif du projet
+
+Ce projet applique les techniques de Traitement du Langage Naturel (NLP) pour analyser le sentiment d’un texte court.
+On construire un pipeline complet :
+
+✔ Nettoyage du texte
+✔ Vectorisation TF-IDF
+✔ Séparation train/test
+✔ Entraînement d’un modèle de Machine Learning
+✔ Évaluation (Précision, Rappel, F1-score)
+✔ Prédiction de nouveaux textes
+
+
+🧠 Techniques utilisées
+🔹 Prétraitement du texte
+
+Mise en minuscules
+
+Suppression de la ponctuation
+
+Suppression des stopwords
+
+Tokenisation
+
+Lemmatisation (optionnel, selon le modèle)
+
+🔹 Modélisation Machine Learning
+
+TF-IDF pour transformer les textes en vecteurs numériques
+
+Logistic Regression (ou Naive Bayes) pour classifier le sentiment
+
+🔹 Évaluation
+
+Matrice de confusion
+
+Rapport de classification (precision / recall / f1-score)
+
+Comparaison des performances
+
+
+🔧 Compétences démontrées dans ce projet
+
+✔ Nettoyage et préparation de données textuelles
+✔ Application du NLP classique
+✔ Manipulation TF-IDF
+✔ Modélisation ML supervisée
+✔ Évaluation des performances
+✔ Visualisation des résultats
+
+📝 Auteur
+
+Eliza Ecaterina Marinica
+Étudiante en Intelligence Artificielle — Collège CDI
+GitHub : https://github.com/elizache16
