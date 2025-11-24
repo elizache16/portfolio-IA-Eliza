@@ -1,122 +1,175 @@
-# Projet Multimodal E-Commerce
+Projet Récapitulatif : Analyse Multimodale de Produits E-Commerce
+🧠 1. Contexte du projet
 
-Projet de Data Science et Deep Learning appliqué au domaine de l'e-commerce.  
-L'objectif est de combiner **plusieurs modalités de données** – images de produits et texte descriptif – pour construire un modèle de classification performant.
+Vous êtes Data Scientist dans une plateforme de vente en ligne.
+Votre manager souhaite savoir s’il est possible de prédire automatiquement la note moyenne (rating) d’un produit avant sa mise en ligne, en utilisant :
 
----
+ses données structurées (prix, catégorie, nombre de ventes)
 
-## 🎯 Objectif du projet
+sa description marketing (texte)
 
-Dans ce projet, nous cherchons à prédire la **catégorie d’un produit e-commerce** en utilisant :
+l’image du produit
 
-- 🖼️ **L'image du produit** (modèle CNN)
-- 📝 **Le texte** : titre et/ou description (modèle NLP)
-- 🔗 **Fusion multimodale** des deux représentations (image + texte)
+Ce projet constitue une révision complète de toutes les compétences apprises durant le semestre : preprocessing, Machine Learning, NLP, Computer Vision, Deep Learning.
 
-Ce projet illustre comment les techniques de **Computer Vision** et de **Traitement Automatique du Langage (NLP)** peuvent être combinées pour améliorer les performances d’un système de recommandation ou de recherche produit.
+🗂️ 2. Données utilisées
+🔹 Données Structurées
 
----
+prix
 
-## 🧩 Contexte pédagogique
+categorie
 
-Ce projet a été réalisé dans le cadre de ma formation en **Intelligence Artificielle** (CDI – Collège, Montréal), comme projet avancé pour :
+nb_ventes
 
-- Mettre en pratique un **pipeline complet de machine learning / deep learning**
-- Manipuler des données **hétérogènes** (images + texte)
-- Concevoir un modèle **multimodal** en Python
+🔹 Données Non-Structurées — Texte
 
----
+description marketing du produit
 
-## 📂 Jeu de données
+🔹 Données Non-Structurées — Images
 
-Le projet repose sur un jeu de données e-commerce contenant :
+image_url (liens Unsplash)
 
-- Des **images de produits** (fichiers `.jpg` ou `.png`)
-- Un fichier `CSV` avec :
-  - un identifiant produit
-  - un titre
-  - une description courte
-  - une catégorie (label de classification)
+🎯 Cible du modèle
 
-> Pour des raisons de taille/licence, les données complètes ne sont pas stockées dans ce dépôt.  
-> Un échantillon ou un lien vers la source (Kaggle, etc.) peut être ajouté dans le dossier `data/`.
+note (entre 0 et 5)
 
----
+🧪 3. Objectifs pédagogiques
+1. Préprocessing
 
-## 🛠️ Approche & Méthodologie
+Nettoyage
 
-Le projet suit les étapes classiques d’un pipeline de Data Science, adaptées au contexte multimodal :
+Gestion des valeurs manquantes
 
-### 1. Exploration & Préparation des données
+Encodage (OneHot)
 
-- Analyse des distributions (catégories, longueur des textes, etc.)
-- Nettoyage du texte :  
-  - mise en minuscules  
-  - suppression de la ponctuation / caractères spéciaux  
-  - éventuellement stopwords, lemmatisation
-- Vérification des images : taille, format, présence de valeurs manquantes
-- Création d’un **dataset aligné** image + texte + label
+Mise à l’échelle
 
-### 2. Modèle Images – CNN
+2. Machine Learning
 
-- Prétraitement des images : redimensionnement, normalisation
-- Construction d’un modèle **Convolutional Neural Network (CNN)** avec Keras/TensorFlow  
-  (ou utilisation d’un modèle pré-entraîné type *Transfer Learning*)
-- Entraînement pour extraire un **vecteur de caractéristiques** pour chaque image
+Régression Linéaire
 
-### 3. Modèle Texte – NLP
+Ridge Regression
 
-- Tokenisation et vectorisation du texte (par ex. `Tokenizer` Keras, `Embedding`, ou TF-IDF + couche dense)
-- Construction d’un petit réseau de neurones pour apprendre une représentation dense du texte
+Validation croisée
 
-### 4. Fusion multimodale
+RMSE, R²
 
-- **Fusion tardive (late fusion)** :  
-  - concaténation des embeddings image et texte
-  - passage dans des couches denses (Fully Connected)
-- Application d’une couche de sortie (Softmax) pour prédire la **catégorie du produit**
+3. NLP
 
-### 5. Évaluation
+Analyse de sentiment avec Transformers
 
-- Séparation train / validation / test
-- Métriques principales :
-  - `accuracy`
-  - matrice de confusion
-  - éventuellement `precision`, `recall`, `f1-score` par classe
-- Comparaison :
-  - modèle **Image seule**
-  - modèle **Texte seul**
-  - modèle **Multimodal (image + texte)**
+Extraction d’un score numérique pour ajouter comme feature
 
----
+4. Computer Vision
 
-## 🧪 Stack technique
+Extraction de vecteurs d’images via ResNet50 (Transfer Learning)
 
-Les principaux outils et bibliothèques utilisés :
+5. Deep Learning
 
-- **Python 3**
-- **NumPy, Pandas** – manipulation des données
-- **Matplotlib / Seaborn** – visualisation
-- **TensorFlow / Keras** – modèles CNN et réseau multimodal
-- **Scikit-learn** – métriques, split train/test
-- Éventuellement : `nltk` ou `spaCy` pour le NLP
+Construction d’un MLP multimodal fusionnant tabulaire + sentiment (+ image optionnel)
 
-Les dépendances sont listées dans `requirements.txt`.
+🏗️ 4. Workflow du Projet
+🧩 Étape 0 — Configuration
 
----
+Importation des librairies : Scikit-Learn, TensorFlow/Keras, Transformers, Requests, PIL, etc.
 
-## 📁 Structure du dépôt
+📊 Étape 1 — Création du Dataset
 
-```text
-projet-multimodal-ecommerce/
-│
-├── data/                       # (optionnel) échantillons ou lien vers le dataset
-├── notebooks/
-│   └── 01_multimodal_ecommerce.ipynb   # Notebook principal (expériences et visualisations)
-├── src/
-│   ├── data_loader.py          # Fonctions de chargement et préparation des données
-│   ├── image_model.py          # Définition du modèle CNN pour les images
-│   ├── text_model.py           # Modèle texte (embedding + réseau dense ou LSTM)
-│   └── multimodal_fusion.py    # Fusion des deux modalités et modèle final
-├── requirements.txt            # Dépendances Python
-└── README.md                   # Présent fichier de présentation du projet
+Simulation de 100 produits réalistes + ajout de bruit (noise) + valeurs manquantes pour l’exercice.
+
+⚙️ Étape 2 — Preprocessing
+
+Création d’un ColumnTransformer :
+
+Variables numériques (prix, nb_ventes)
+
+Imputation : médiane
+
+StandardScaler
+
+Variable catégorielle (categorie)
+
+Imputation : mode
+
+OneHotEncoder
+
+📈 Étape 3 — Baseline ML
+
+Modèle simple :
+
+Ridge Regression
+
+Split Train/Test
+
+Validation croisée
+
+RMSE & R²
+
+Servira de comparaison pour le modèle final.
+
+📝 Étape 4 — NLP : Sentiment
+
+Utilisation d’un modèle multilingue HuggingFace pour obtenir un sentiment_score.
+
+🖼️ Étape 5 — Computer Vision
+
+Pipeline d’extraction via ResNet50 pré-entraîné :
+
+Téléchargement de l’image
+
+Redimension 224x224
+
+Extraction du vecteur 2048 dimensions
+
+🧬 Étape 6 — Modèle Multimodal (MLP)
+
+Fusion des données :
+
+Features tabulaires preprocessées
+
+Score NLP
+
+(Optionnel) Vecteurs d’images
+
+Architecture du MLP :Entrée tabulaire → Dense → BatchNorm → ReLU  
+Entrée sentiment → Dense  
+-----------------------------------------
+Fusion → Dense → Dropout → Dense → Sortie
+Évaluation :
+
+RMSE
+
+Courbes d’apprentissage
+
+Comparaison avec la baseline
+
+📌 5. Questions de réflexion
+
+Le MLP multimodal dépasse-t-il la baseline Ridge ? Pourquoi ?
+
+Comment intégrer les vecteurs d’images dans le MLP ?
+
+Si l’on change l’objectif en “Populaire vs Non Populaire”, que changerait-on dans la dernière couche ?
+
+🛠️ 6. Stack Technique
+
+Python 3
+
+Pandas, NumPy
+
+Scikit-Learn
+
+TensorFlow / Keras
+
+Transformers (HuggingFace)
+
+PIL, Requests
+
+Matplotlib, Seaborn
+
+👩‍💻 7. Auteure
+
+Eliza Ecaterina Marinica
+Étudiante en Intelligence Artificielle – Montréal
+Projet préparé pour mon portfolio IA et ma demande de stage en Data Science / Machine Learning.
+  
